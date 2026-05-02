@@ -57,6 +57,24 @@ python main.py
 
 ---
 
+## ⚙️ Hardware Setup
+
+This project spans the full stack from physical assembly to firmware to vision — not just software.
+
+**1. Mechanical assembly**  
+The arm is built from a 6-servo kit (base rotation, shoulder, elbow, wrist, wrist rotation, gripper). Each joint is connected to a dedicated servo horn and secured to the frame. Getting the torque balance right across joints matters for repeatability.
+
+**2. Firmware (Arduino IDE + ESP8266)**  
+The ESP8266 runs a lightweight HTTP server written in Arduino C++. On receiving a request like `/cmd?X 110`, it parses the axis and target value, then drives the corresponding servo via PWM. The firmware also handles request decoding, bounds checking per axis, and smooth stepping between positions to avoid servo strain.
+
+**3. Wi-Fi bridge**  
+The ESP8266 hosts its own access point. The Python host connects to this network and sends commands over plain HTTP — keeping the communication layer simple and latency low.
+
+**4. Integration**  
+Once the arm is calibrated and the firmware is flashed, the Python system treats the arm as a stateless HTTP endpoint. All sequencing, safety logic, and world-state tracking live on the software side.
+
+---
+
 ## 🎯 Calibration
 
 Workspace slots such as `bottom`, `top_left`, and `top_right` are defined in the `POSES` dictionary in `main.py` as per-axis servo values.  
