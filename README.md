@@ -3,7 +3,7 @@
 A real-time **human-robot interaction** system that connects computer vision with physical manipulation.  
 No buttons, joysticks, or handheld controllers — the interface is your hand.
 
-![demo](assets/demo.gif)
+![demo](assets/demo1.gif)
 
 ![demo2](assets/demo2.gif)
 
